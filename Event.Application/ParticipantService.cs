@@ -1,40 +1,39 @@
-﻿using Event.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Event.Application.Interfaces;
+using Event.Domain;
+using Event.Infrastructure.Interfaces;
 
 namespace Event.Application
 {
     public class ParticipantService : IParticipantService
     {
-        private readonly IParticipantRepository participantRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public ParticipantService(IParticipantRepository participantRepository)
+        public ParticipantService(IUnitOfWork unitOfWork)
         {
-            this.participantRepository = participantRepository;
+            this.unitOfWork = unitOfWork;
         }
         public List<Domain.Participant> GetAllParticipants()
         {
-            return this.participantRepository.GetAllParticipants();
+            return unitOfWork.Participants.GetAllParticipants();
         }
 
         public Domain.Participant GetParticipantById(int id)
         {
-            return participantRepository.GetParticipantById(id);
+            return unitOfWork.Participants.GetParticipantById(id);
         }
 
         public void RegisterParticipant(Participant participant)
         {
-            this.participantRepository.AddParticipant(participant);
+            unitOfWork.Participants.AddParticipant(participant);
+            unitOfWork.Commit();
         }
 
         public void UnregisterParticipant(Participant participant)
         {
             if (participant != null)
             {
-                this.participantRepository.RemoveParticipant(participant.Id);
+                unitOfWork.Participants.RemoveParticipant(participant.Id);
+                unitOfWork.Commit();
             }
         }
     }

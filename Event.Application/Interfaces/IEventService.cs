@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Event.Application
+namespace Event.Application.Interfaces
 {
-    public interface IEventRepository
+    public interface IEventService
     {
         List<Domain.Event> GetAllEvents();
         Domain.Event GetEventById(int id);

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IEventRepository.cs" />
+    <Compile Remove="Interfaces\IParticipantRepository.cs" />
+    <Compile Remove="Interfaces\IUnitOfWork.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Event.Domain\Event.Domain.csproj" />
+<ProjectReference Include="..\Event.Infrastructure\Event.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

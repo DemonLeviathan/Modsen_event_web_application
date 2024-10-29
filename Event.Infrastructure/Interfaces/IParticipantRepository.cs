@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Event.Application
+namespace Event.Infrastructure.Interfaces
 {
-    public interface IParticipantService
+    public interface IParticipantRepository
     {
         List<Domain.Participant> GetAllParticipants();
         Domain.Participant GetParticipantById(int id);
-
-        void RegisterParticipant(Domain.Participant participant);
-        void UnregisterParticipant(Domain.Participant participant);
+        void AddParticipant(Domain.Participant participant);
+        void RemoveParticipant(int id);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Event.Application;
+﻿using Event.Infrastructure.Interfaces;
 using Event.Domain;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

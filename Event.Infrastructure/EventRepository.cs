@@ -1,4 +1,4 @@
-﻿using Event.Application;
+﻿using Event.Infrastructure.Interfaces;
 using Event.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -40,7 +40,7 @@ namespace Event.Infrastructure
         public List<Domain.Event> GetEventByCategory(string category)
         {
             return _context.Events
-                .Where(e => e.Category.Equals(category, StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.Category.ToUpper() == category.ToUpper())
                 .ToList();
         }
 
@@ -59,14 +59,13 @@ namespace Event.Infrastructure
         public List<Domain.Event> GetEventByLocation(string location)
         {
             return _context.Events
-                .Where(e => e.Location.Equals(location, StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.Location.ToUpper() == location.ToUpper())
                 .ToList();
         }
 
         public Domain.Event GetEventByName(string name)
         {
-            return _context.Events
-                .FirstOrDefault(e => e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return _context.Events.FirstOrDefault(e => e.Name.ToUpper() == name.ToUpper());
         }
 
         public void RemoveEvent(Domain.Event @event)

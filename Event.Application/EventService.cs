@@ -1,62 +1,69 @@
-﻿namespace Event.Application
+﻿using Event.Application.Interfaces;
+using Event.Infrastructure.Interfaces;
+
+namespace Event.Application
 {
     public class EventService : IEventService
     {
-        private readonly IEventRepository eventRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public EventService(IEventRepository eventRepository)
+        public EventService(IUnitOfWork unitOfWork)
         {
-            this.eventRepository = eventRepository;
+            this.unitOfWork = unitOfWork;
         }
 
-        public void AddEvent(Domain.Event @event)
+        public List<Domain.Event> GetAllEvents()
         {
-            eventRepository.AddEvent(@event);
-        }
-
-        public void AddImageToEvent(Domain.Event @event)
-        {
-            eventRepository.AddImageToEvent(@event);
-        }
-
-        public List<Domain.Event> GetEventByCategory(string category)
-        {
-            return eventRepository.GetEventByCategory(category);
-        }
-
-        public List<Domain.Event> GetEventByDate(DateTime date)
-        {
-            return eventRepository.GetEventByDate(date);
+            return unitOfWork.Events.GetAllEvents();
         }
 
         public Domain.Event GetEventById(int id)
         {
-            return eventRepository.GetEventById(id);
-        }
-
-        public List<Domain.Event> GetEventByLocation(string location)
-        {
-            return eventRepository.GetEventByLocation(location);
+            return unitOfWork.Events.GetEventById(id);
         }
 
         public Domain.Event GetEventByName(string name)
         {
-            return eventRepository.GetEventByName(name);
+            return unitOfWork.Events.GetEventByName(name);
+        }
+
+        public void AddEvent(Domain.Event @event)
+        {
+            unitOfWork.Events.AddEvent(@event);
+            unitOfWork.Commit(); 
         }
 
         public void RemoveEvent(Domain.Event @event)
         {
-            eventRepository.RemoveEvent(@event);
+            unitOfWork.Events.RemoveEvent(@event);
+            unitOfWork.Commit();
         }
 
         public void UpdateEvent(Domain.Event @event)
         {
-            eventRepository.UpdateEvent(@event);
+            unitOfWork.Events.UpdateEvent(@event);
+            unitOfWork.Commit();
         }
 
-        List<Domain.Event> IEventService.GetAllEvents()
+        public List<Domain.Event> GetEventByDate(DateTime date)
         {
-            return this.eventRepository.GetAllEvents();
+            return unitOfWork.Events.GetEventByDate(date);
+        }
+
+        public List<Domain.Event> GetEventByLocation(string location)
+        {
+            return unitOfWork.Events.GetEventByLocation(location);
+        }
+
+        public List<Domain.Event> GetEventByCategory(string category)
+        {
+            return unitOfWork.Events.GetEventByCategory(category);
+        }
+
+        public void AddImageToEvent(Domain.Event @event)
+        {
+            unitOfWork.Events.AddImageToEvent(@event);
+            unitOfWork.Commit();
         }
     }
 }

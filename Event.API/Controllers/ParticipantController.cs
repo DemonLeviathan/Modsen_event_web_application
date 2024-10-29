@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Event.Application;
+using Event.Application.Interfaces;
 
 namespace Event.API.Controllers
 {
@@ -20,6 +20,7 @@ namespace Event.API.Controllers
         {
             return Ok(this.participantService.GetAllParticipants());
         }
+
 
     }
 }
