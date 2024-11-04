@@ -37,4 +37,4 @@ namespace Event.Application
             }
         }
     }
-}
+} 

@@ -11,6 +11,6 @@
         public int MaxParticipants { get; set; }
         public List<Participant> Participants { get; set; } = new List<Participant>();
         public string ImageUrl { get; set; }
-
+        public List<EventParticipant> EventParticipants { get; set; } = new();
     }
 }

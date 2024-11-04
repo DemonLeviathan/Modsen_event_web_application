@@ -10,11 +10,17 @@ namespace Event.Application
         public IEventRepository Events { get; }
         public IParticipantRepository Participants { get; }
 
-        public UnitOfWork(ApplicationDBContext dbContext, IEventRepository events, IParticipantRepository participants)
+        public IEventParticipantRepository EventParticipants {  get; }
+
+        public IUserRepository Users { get; }
+
+        public UnitOfWork(ApplicationDBContext dbContext, IEventRepository events, IParticipantRepository participants, IEventParticipantRepository eventParticipants, IUserRepository users)
         {
             this.dbContext = dbContext;
             Events = events;
             Participants = participants;
+            EventParticipants = eventParticipants;
+            Users = users;
         }
 
         public void Commit()

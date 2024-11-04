@@ -27,6 +27,12 @@ builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IParticipantRepository, ParticipantRepository>();
 builder.Services.AddScoped<IParticipantService, ParticipantService>();
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IEventParticipantRepository, EventParticipantRepository>();
+builder.Services.AddScoped<IEventParticipantService, EventParticipantService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
